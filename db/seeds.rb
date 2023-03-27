@@ -5,5 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-User.create(Faker::Internet.user('username', 'email', 'password'))
+puts "Start seeding..."
+10.times do
+  user = User.create!(
+    username:Faker::Internet.username,
+    email:Faker::Internet.email,
+    password:"123",
+    password_confirmation:"123"
+  )
+end
+puts "done"
