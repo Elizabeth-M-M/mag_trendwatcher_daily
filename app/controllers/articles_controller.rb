@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   end
   def show
     article= find_article
-    render json: article
+    render json: article, serializer:ArticlePlusContentSerializer
   end
   private
   def find_article
