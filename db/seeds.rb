@@ -16,7 +16,7 @@ I turn my nose at those sanctimonious people who treat their books like an only 
 end
 
 10.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Technology",
     content:SOME_CONTENT,
     category:"Technology",
@@ -24,7 +24,7 @@ end
   )
 end
 7.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Science",
     content:SOME_CONTENT,
     category:"Science",
@@ -32,7 +32,7 @@ end
   )
 end
 2.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Lifestyle",
     content:SOME_CONTENT,
     category:"Lifestyle",
@@ -40,7 +40,7 @@ end
   )
 end
 7.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Travel",
     content:SOME_CONTENT,
     category:"Travel",
@@ -48,7 +48,7 @@ end
   )
 end
 8.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Sport",
     content:SOME_CONTENT,
     category:"Sport",
@@ -56,7 +56,7 @@ end
   )
 end
 4.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Gaming",
     content:SOME_CONTENT,
     category:"Gaming",
@@ -64,10 +64,18 @@ end
   )
 end
 5.times do
-  article= Article.create(
+  article= Article.create!(
     title: "I'm Food",
     content:SOME_CONTENT,
     category:"Food",
+    image:"https://images.pexels.com/photos/15201214/pexels-photo-15201214.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load"
+  )
+end
+5.times do
+  article= Article.create!(
+    title: "I'm Business",
+    content:SOME_CONTENT,
+    category:"Business",
     image:"https://images.pexels.com/photos/15201214/pexels-photo-15201214.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load"
   )
 end
