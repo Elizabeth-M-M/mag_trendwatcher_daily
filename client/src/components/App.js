@@ -10,7 +10,7 @@ import DisplayArticle from "./DisplayArticle";
 const App = () => {
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
- 
+ console.log(user)
   useEffect(() => {
     fetch("/articles").then((res) => {
       if (res.ok) {
@@ -24,7 +24,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/me/user").then((res) => {
+    fetch("/me").then((res) => {
       if (res.ok) {
         res.json().then((user) => setUser(user));
       }

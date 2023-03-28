@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :reviews, only: :create
   resources :articles, only: [:show, :index]
   post "/signup", to: "users#create"
-  get "/me/user", to: "users#show"
-  get "/me/editor", to: "editors#show"
+  get "/me", to: "users#show"
+  # get "/me/editor", to: "editors#show"
   post "/login/user", to: "sessions#create"
   post "/login/editor", to: "editors#create"
   delete "/logout", to: "sessions#destroy"

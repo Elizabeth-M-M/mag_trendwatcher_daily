@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = ({ handleUser }) => {
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   const [loginFormData, setFormData] = useState({
     username: "",
@@ -11,6 +12,7 @@ const Login = ({ handleUser }) => {
   });
 
   function handleInputs(event) {
+    setIsChecked(event.target.checked);
     const name = event.target.name;
     const value = event.target.value;
     setFormData({
@@ -21,8 +23,15 @@ const Login = ({ handleUser }) => {
   // This POST request creates a user on the database and logs in a user to the program
   function handleSubmit(event) {
     event.preventDefault();
+     let userSession;
+     if (isChecked == true) {
+       userSession = "editor";
+     } else {
+       userSession = "user";
+     }
+     console.log(userSession)
 
-    fetch("/login/user", {
+    fetch(`/login/${userSession}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,15 +91,18 @@ const Login = ({ handleUser }) => {
                 required
               />
             </div>
-            <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck1"
-              />
-              <label class="form-check-label" for="exampleCheck1">
-                Sign in as editor
-              </label>
+            <div class="col-12">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="gridCheck"
+                  onChange={handleInputs}
+                />
+                <label class="form-check-label" for="gridCheck">
+                  Sign in as Editor
+                </label>
+              </div>
             </div>
             <Link to="/signup">Don't have an account?</Link>
             <div className="col-12">

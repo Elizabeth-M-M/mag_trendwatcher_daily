@@ -10,10 +10,16 @@ class UsersController < ApplicationController
       render json: user
     end
 
-    #GET /me/user
+    #GET /me
     def show
-      user=User.find(session[:user_id])
+      if(session[:user_id])
+        user=User.find(session[:user_id])
       render json: user
+      else
+        editor=Editor.find(session[:editor_id])
+      render json: editor
+      end
+      
     end
 
     private
