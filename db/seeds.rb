@@ -90,7 +90,8 @@ end
 # end
 editor=Editor.create!(
   username:"editor",
-  password:98765
+  password:"98765",
+  password_confirmation:"98765"
 )
 
 puts "done"
