@@ -24,7 +24,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/me").then((res) => {
+    fetch("/me/user").then((res) => {
       if (res.ok) {
         res.json().then((user) => setUser(user));
       }

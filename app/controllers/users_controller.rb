@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       render json: user
     end
 
-    #GET /me
+    #GET /me/user
     def show
       user=User.find(session[:user_id])
       render json: user
