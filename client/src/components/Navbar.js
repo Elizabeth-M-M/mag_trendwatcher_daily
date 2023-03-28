@@ -19,9 +19,12 @@ const Navbar = ({user, onLogout}) => {
           <li className="nav-item pe-4">
             <Link to="/">Home</Link>
           </li>
+          <li className="nav-item pe-4">
+            <Link to="/category">Category</Link>
+          </li>
         </ul>
         <p>
-          {!user? (
+          {!user ? (
             <button
               className="btn btn-info"
               onClick={() => {
