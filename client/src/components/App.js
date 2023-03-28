@@ -46,7 +46,7 @@ const App = () => {
         ></Route>
         <Route
           path="/articles/:id"
-          element={<DisplayArticle />}
+          element={<DisplayArticle user={user} />}
         ></Route>
         <Route path="/signup" element={<Signup handleUser={setUser} />}></Route>
       </Routes>
