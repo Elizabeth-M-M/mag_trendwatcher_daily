@@ -2,11 +2,11 @@ class ArticlesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :article_not_found
 
   def index 
-    render json: Article.all
+    render json: Article.all, each_serializer:ArticlePlusContentSerializer
   end
   def show
     article= find_article
-    render json: article, serializer:ArticlePlusContentSerializer
+    render json: article, include: ['reviews','reviews.user'] 
   end
   private
   def find_article

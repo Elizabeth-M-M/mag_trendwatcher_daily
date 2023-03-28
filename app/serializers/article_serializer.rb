@@ -1,7 +1,5 @@
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :image, :title, :category, :summary
-  def summary
-    "#{self.object.content[0..100]}..."
-
-  end
+  attributes :id, :image, :title, :category, :content
+  has_many :reviews
+  
 end
