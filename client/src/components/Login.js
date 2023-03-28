@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = ({handleUser}) => {
+const Login = ({ handleUser }) => {
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
 
@@ -81,6 +81,16 @@ const Login = ({handleUser}) => {
                 value={loginFormData.password}
                 required
               />
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1">
+                Sign in as editor
+              </label>
             </div>
             <Link to="/signup">Don't have an account?</Link>
             <div className="col-12">

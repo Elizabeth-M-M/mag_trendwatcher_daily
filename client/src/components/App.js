@@ -5,8 +5,24 @@ import Navbar from "./Navbar";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
+import Category from "./Category";
+import DisplayArticle from "./DisplayArticle";
 const App = () => {
   const [user, setUser] = useState(null);
+  const [allArticles, setAllArticles] = useState([]);
+ 
+  useEffect(() => {
+    fetch("/articles").then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          
+          setAllArticles(data)
+          
+        });
+      }
+    });
+  }, []);
+
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -19,8 +35,19 @@ const App = () => {
     <div className="container">
       <Navbar user={user} onLogout={setUser} />
       <Routes>
-        <Route path="/" element={<Home user={user} />}></Route>
+        <Route
+          path="/"
+          element={<Home user={user} articles={allArticles} />}
+        ></Route>
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
+        <Route
+          path="/category"
+          element={<Category articles={allArticles} />}
+        ></Route>
+        <Route
+          path="/articles/:id"
+          element={<DisplayArticle />}
+        ></Route>
         <Route path="/signup" element={<Signup handleUser={setUser} />}></Route>
       </Routes>
     </div>
