@@ -62,8 +62,10 @@ const DisplayArticle = ({user}) => {
     <>
       <div>
         <h3>{oneArticle.title}</h3>
-        <p>{oneArticle.content}</p>
+        <p className="p-2 fw-bold">{oneArticle.part1}</p>
+        <p className="p-2">{oneArticle.part2}</p>
         <img src={oneArticle.image} alt="" />
+        <p className="p-2">{oneArticle.part3}</p>
       </div>
       <div>
         <h6>Leave a Review</h6>
