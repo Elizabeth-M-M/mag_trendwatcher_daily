@@ -87,3 +87,11 @@ export default Home;
 //  <div class="container article-bg">
 //    <div class="clearfix">{/* {articlelist} */}</div>
 //  </div>;
+
+
+// const array = ["a", "b", "c", "d"];
+// const n = 3;
+
+// const result = array.slice(-n).slice(0, array.length - 2);
+
+// console.log(result);
