@@ -15,9 +15,9 @@ const App = () => {
     fetch("/articles").then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          
+
           setAllArticles(data)
-          
+
         });
       }
     });
@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
         <Route
           path="/category"
-          element={<Category articles={allArticles} />}
+          element={<Category articles={allArticles} user={user} />}
         ></Route>
         <Route
           path="/articles/:id"
