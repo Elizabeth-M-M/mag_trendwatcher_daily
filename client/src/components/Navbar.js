@@ -23,9 +23,7 @@ const Navbar = ({user, onLogout}) => {
           <li className="nav-item pe-4">
             <Link to="/category">Category</Link>
           </li>
-          <li className="nav-item pe-4">
-            <Link to="article_add">Add Article</Link>
-          </li>
+          
         </ul>
         <p>
           {!user ? (

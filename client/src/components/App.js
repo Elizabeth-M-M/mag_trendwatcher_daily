@@ -8,9 +8,11 @@ import Signup from "./Signup";
 import Category from "./Category";
 import DisplayArticle from "./DisplayArticle";
 import ArticleForm from "./ArticleForm";
+import EditArticleForm from "./EditArticleForm";
 const App = () => {
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
+  const[articleToEdit, setArticleToEdit]=useState(null)
  console.log(user)
   useEffect(() => {
     fetch("/articles").then((res) => {
@@ -47,13 +49,24 @@ const App = () => {
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
         <Route path="/article_add" element={<ArticleForm />}></Route>
         <Route
+          path="/article_edit"
+          element={<EditArticleForm articleToEdit={articleToEdit} />}
+        ></Route>
+        <Route
           path="/category"
-          element={<Category articles={allArticles} user={user} 
-          removeArticle={handleRemoveArticle}/>}
+          element={
+            <Category
+              articles={allArticles}
+              user={user}
+              removeArticle={handleRemoveArticle}
+            />
+          }
         ></Route>
         <Route
           path="/articles/:id"
-          element={<DisplayArticle user={user} />}
+          element={
+            <DisplayArticle user={user} articleToEdit={setArticleToEdit} />
+          }
         ></Route>
         <Route path="/signup" element={<Signup handleUser={setUser} />}></Route>
       </Routes>

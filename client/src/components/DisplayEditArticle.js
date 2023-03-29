@@ -15,7 +15,7 @@ const DisplayEditArticle = ({ elem, removeArticle }) => {
         <h6>{elem.category}</h6>
         <p>{elem.summary}</p>
         <Link to={`/articles/${elem.id}`}>More</Link>
-        <button className="btn btn-info">Edit</button>
+        
         <button className="btn btn-info" onClick={handleDelete}>
           delete
         </button>

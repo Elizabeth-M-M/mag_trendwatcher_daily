@@ -3,10 +3,10 @@ import { useParams } from 'react-router';
 import './App.css'
 import { useNavigate } from 'react-router';
 
-const DisplayArticle = ({user}) => {
-  const navigator= useNavigate()
+const DisplayArticle = ({ user, articleToEdit }) => {
+  const navigator = useNavigate();
   const [oneArticle, setOneArticle] = useState({});
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState([]);
   let { id } = useParams();
 
@@ -15,52 +15,56 @@ const DisplayArticle = ({user}) => {
       if (res.ok) {
         res.json().then((data) => {
           setOneArticle(data);
-          setReviews(data.reviews)
+          setReviews(data.reviews);
         });
       }
     });
   }, []);
   // console.log(reviews)
 
-  function handleReview(e){
+  function handleReview(e) {
     e.preventDefault();
 
     if (user === null) {
       navigator("/login");
     } else {
-
       let reviewFormData = {
         comment,
         user_id: user.id,
-        article_id: oneArticle.id
+        article_id: oneArticle.id,
       };
       // console.log(reviewFormData)
-       fetch("/reviews", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(reviewFormData),
-       }).then((r) => {
-         if (r.ok) {
-           r.json().then((data) => {
-             setReviews([...reviews, data]);
-             setComment("");
-           });
-
-
-         } else {
-           r.json().then((err) => console.log(err.errors));
-         }
-       });
+      fetch("/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reviewFormData),
+      }).then((r) => {
+        if (r.ok) {
+          r.json().then((data) => {
+            setReviews([...reviews, data]);
+            setComment("");
+          });
+        } else {
+          r.json().then((err) => console.log(err.errors));
+        }
+      });
     }
-
-
   }
   // console.log(comment)
   return (
     <>
       <div>
+        <button
+          className="btn btn-info"
+          onClick={() => {
+            articleToEdit(oneArticle);
+            navigator("/article_edit");
+          }}
+        >
+          Edit
+        </button>
         <h3>{oneArticle.title}</h3>
         <p className="p-2 fw-bold">{oneArticle.part1}</p>
         <p className="p-2">{oneArticle.part2}</p>
@@ -113,6 +117,6 @@ const DisplayArticle = ({user}) => {
       </div>
     </>
   );
-}
+};
 
 export default DisplayArticle
