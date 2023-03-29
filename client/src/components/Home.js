@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import ArticleText from "./ArticleText";
 import ArticleImage from "./ArticleImage";
 import { useNavigate } from "react-router-dom";
+import CategoryBtn from "./CategoryBtn";
+import ArticleImage2 from "./ArticleImage2";
 
-const Home = ({ user, articles }) => {
+
+const Home = ({ user, articles, categoryBtns, setCategory }) => {
   const navigator = useNavigate();
   const [headerArticle, setHeaderArticle] = useState({});
 
@@ -13,48 +16,59 @@ const Home = ({ user, articles }) => {
     }
   }, []);
 
-  let rightArticles = articles.slice(0, 4).map((article, i) => {
-    return <ArticleText elem={article} key={i} />;
-  });
+   let leftArticles = articles.slice(0, 4).map((article, i) => {
+     return <ArticleImage elem={article} key={i} />;
+   });
+   let rightArticles = articles.slice(4, 8).map((article, i) => {
+     return <ArticleImage2 elem={article} key={i} />;
+   });
   let userHomePage = (
     <div>
       <div class="header">
-          <div class="row">
-            <div class="col-md-8 header-content">
-              <div class="image-holder-header">
-                <img
-                  src={
-                    articles.length === 0
-                      ? "https://t.ly/_JOz"
-                      : headerArticle.image
-                  }
-                  alt=""
-                />
-              </div>
-              <div class="header-floater bg-light p-4">
-                <h6>
-                  {articles.length === 0 ? "Lifestyle" : headerArticle.category}
-                </h6>
-                <h3>
-                  {articles.length === 0
-                    ? "A Walk to Remember"
-                    : headerArticle.title}
-                </h3>
-                <button class="btn btn-info">Read More</button>
-              </div>
+        <div class="row">
+          <div class="col-md-8 header-content">
+            <div class="image-holder-header">
+              <img
+                src={
+                  articles.length === 0
+                    ? "https://t.ly/_JOz"
+                    : headerArticle.image
+                }
+                alt=""
+              />
             </div>
-
-            <div class="col-md-4">
-              <h6>Recent News</h6>
-              {  rightArticles}
+            <div class="header-floater bg-light p-4">
+              <h6>
+                {articles.length === 0 ? "Lifestyle" : headerArticle.category}
+              </h6>
+              <h3>
+                {articles.length === 0
+                  ? "A Walk to Remember"
+                  : headerArticle.title}
+              </h3>
+              <button class="btn btn-info">Read More</button>
             </div>
           </div>
-        </div>
-        
-        
-      </div>
 
-   
+          <div class="col-md-4">
+            <h6>Recent News</h6>
+            {articles.slice(6, 10).map((article, i) => {
+              return <ArticleText elem={article} key={i} />;
+            })}
+            
+          </div>
+        </div>
+      </div>
+      <div>
+        {categoryBtns.map((btn) => {
+          return <CategoryBtn key={btn} btn={btn} setCategory={setCategory} />;
+        })}
+      </div>
+      <div class="row">
+        <div className="col">{leftArticles}</div>
+        <div className="col">{rightArticles}</div>
+      </div>
+    </div>
   );
   let editorHomePage = (
     <div>
@@ -73,7 +87,11 @@ const Home = ({ user, articles }) => {
     <>
       <div className="container">
         {user ? <p>Welcome, {user.username}</p> : null}
-        {!user ? userHomePage : user.username !== "editor" ? userHomePage : editorHomePage}
+        {!user
+          ? userHomePage
+          : user.username !== "editor"
+          ? userHomePage
+          : editorHomePage}
       </div>
     </>
   );

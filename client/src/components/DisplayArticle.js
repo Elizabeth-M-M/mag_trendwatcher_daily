@@ -9,6 +9,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState([]);
   let { id } = useParams();
+  console.log(id)
 
   useEffect(() => {
     fetch(`/articles/${id}`).then((res) => {

@@ -14,6 +14,18 @@ const App = () => {
   const [allArticles, setAllArticles] = useState([]);
   const[articleToEdit, setArticleToEdit]=useState(null)
  console.log(user)
+ const categoryBtns = [
+   "All",
+   "Lifestyle",
+   "Travel",
+   "Sport",
+   "Technology",
+   "Gaming",
+   "Science",
+   "Food",
+   "Business",
+ ];
+ const [category, setCategory] = useState("All");
   useEffect(() => {
     fetch("/articles").then((res) => {
       if (res.ok) {
@@ -44,7 +56,14 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home user={user} articles={allArticles} />}
+          element={
+            <Home
+              user={user}
+              articles={allArticles}
+              categoryBtns={categoryBtns}
+              setCategory={setCategory}
+            />
+          }
         ></Route>
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
         <Route path="/article_add" element={<ArticleForm />}></Route>
@@ -56,9 +75,12 @@ const App = () => {
           path="/category"
           element={
             <Category
+              categoryBtns={categoryBtns}
               articles={allArticles}
               user={user}
               removeArticle={handleRemoveArticle}
+              setCategory={setCategory}
+              category={category}
             />
           }
         ></Route>

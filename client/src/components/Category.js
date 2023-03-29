@@ -4,61 +4,68 @@ import ArticleText from "./ArticleText";
 import CategoryBtn from "./CategoryBtn";
 import DisplayEditArticle from "./DisplayEditArticle";
 import { useNavigate } from "react-router";
+import ArticleImage2 from "./ArticleImage2";
 
-const Category = ({ articles, user, removeArticle }) => {
+const Category = ({
+  articles,
+  user,
+  removeArticle,
+  categoryBtns,
+  setCategory,
+  category
+}) => {
   const [search, setSearch] = useState("");
-  const navigator= useNavigate()
+  const navigator = useNavigate();
   // const [selectedArticles, setSelectedArticles] = useState([]);
-  const[category, setCategory]=useState('All')
-const categoryBtns=["All", "Lifestyle", "Travel", "Sport", "Technology", "Gaming", "Science", "Food", "Business"]
 
-function handleSearch(event) {
-  setSearch(event.target.value);
-}
-
-let found = articles.filter((article) => {
-  let articleName = article.title.toLocaleLowerCase();
-  let articleCategory = article.category.toLocaleLowerCase();
- 
-
-  if (search === "") {
-    return true;
-  } else if (
-    articleName.includes(search) ||
-    articleCategory.includes(search)
-  ) {
-    return article;
+  function handleSearch(event) {
+    setSearch(event.target.value);
   }
-});
 
- let selectedArticles=[]
- if (category === "All") {
-  if(user&&user.username==="editor"){
-    console.log(true)
+  let found = articles.filter((article) => {
+    let articleName = article.title.toLocaleLowerCase();
+    let articleCategory = article.category.toLocaleLowerCase();
+
+    if (search === "") {
+      return true;
+    } else if (
+      articleName.includes(search) ||
+      articleCategory.includes(search)
+    ) {
+      return article;
+    }
+  });
+
+  let selectedArticles = [];
+  if (category === "All") {
+    if (user && user.username === "editor") {
+      console.log(true);
+    }
+    let i = 0;
+    do {
+      selectedArticles.push(
+        // articles[Math.floor(Math.random() * articles.length)]
+        articles[i]
+      );
+      i++;
+    } while (i < 10);
+  } else {
+    selectedArticles = articles.filter((article) => {
+      if (category === article.category) {
+        return article;
+      }
+    });
   }
-     let i = 0;
-     do {
-       selectedArticles.push(articles[Math.floor(Math.random() * articles.length)]);
-       i++;
-     } while (i < 10);
- }else{
-  selectedArticles = articles.filter((article) => {
-  if (category === article.category) {
-     return article;
-   }
- });
+  //  console.log(selectedArticles)
 
- }
-//  console.log(selectedArticles)
-
-
-
-
-  let leftArticles = selectedArticles.slice(0, 6).map((article, i) => {
+  let leftArticles = selectedArticles.slice(0, 4).map((article, i) => {
     return <ArticleImage elem={article} key={i} />;
   });
+    let rightArticles = selectedArticles.slice(4, 8).map((article, i) => {
+      return <ArticleImage2 elem={article} key={i} />;
+    });
   // console.log(category)
-  console.log(user)
+  // console.log(user);
   let userView = (
     <>
       <div>
@@ -69,7 +76,14 @@ let found = articles.filter((article) => {
       <div class="container article-bg">
         <div class="row">
           <div class="col-md-8">
-            <div class="clearfix">{leftArticles}</div>
+            <div class="row">
+              <div className="col">
+                {leftArticles}
+                </div>
+              <div className="col">
+                {rightArticles}
+                </div>
+            </div>
           </div>
 
           <div class="col-md-4">
@@ -107,7 +121,13 @@ let found = articles.filter((article) => {
         </button>
         <div className="row">
           {found.map((article, i) => {
-            return <DisplayEditArticle elem={article} key={i} removeArticle={removeArticle}/>;
+            return (
+              <DisplayEditArticle
+                elem={article}
+                key={i}
+                removeArticle={removeArticle}
+              />
+            );
           })}
         </div>
       </div>
@@ -115,10 +135,7 @@ let found = articles.filter((article) => {
   );
 
   return (
-    <>
-    {!user?userView:user.username!=="editor"?userView:editorView}
-    </>
-    
+    <>{!user ? userView : user.username !== "editor" ? userView : editorView}</>
   );
 };
 
