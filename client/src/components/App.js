@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Category from "./Category";
 import DisplayArticle from "./DisplayArticle";
+import ArticleForm from "./ArticleForm";
 const App = () => {
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
@@ -30,6 +31,10 @@ const App = () => {
       }
     });
   }, []);
+  function handleRemoveArticle(id){
+     let sortedArticles = allArticles.filter((article) => article.id !== id);
+     setAllArticles(sortedArticles)
+  }
 
   return (
     <div className="container">
@@ -40,9 +45,11 @@ const App = () => {
           element={<Home user={user} articles={allArticles} />}
         ></Route>
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
+        <Route path="/article_add" element={<ArticleForm />}></Route>
         <Route
           path="/category"
-          element={<Category articles={allArticles} user={user} />}
+          element={<Category articles={allArticles} user={user} 
+          removeArticle={handleRemoveArticle}/>}
         ></Route>
         <Route
           path="/articles/:id"

@@ -3,11 +3,34 @@ import ArticleImage from "./ArticleImage";
 import ArticleText from "./ArticleText";
 import CategoryBtn from "./CategoryBtn";
 import DisplayEditArticle from "./DisplayEditArticle";
+import { useNavigate } from "react-router";
 
-const Category = ({ articles, user }) => {
+const Category = ({ articles, user, removeArticle }) => {
+  const [search, setSearch] = useState("");
+  const navigator= useNavigate()
   // const [selectedArticles, setSelectedArticles] = useState([]);
   const[category, setCategory]=useState('All')
 const categoryBtns=["All", "Lifestyle", "Travel", "Sport", "Technology", "Gaming", "Science", "Food", "Business"]
+
+function handleSearch(event) {
+  setSearch(event.target.value);
+}
+
+let found = articles.filter((article) => {
+  let articleName = article.title.toLocaleLowerCase();
+  let articleCategory = article.category.toLocaleLowerCase();
+ 
+
+  if (search === "") {
+    return true;
+  } else if (
+    articleName.includes(search) ||
+    articleCategory.includes(search)
+  ) {
+    return article;
+  }
+});
+
  let selectedArticles=[]
  if (category === "All") {
   if(user&&user.username==="editor"){
@@ -64,13 +87,28 @@ const categoryBtns=["All", "Lifestyle", "Travel", "Sport", "Technology", "Gaming
   let editorView = (
     <>
       <div className="container">
-        <h4>search</h4>
-        <button className="btn btn-info">Add article</button>
+        <div className="ui large fluid icon input py-5">
+          <input
+            className="p-2"
+            type="text"
+            placeholder="Search for an article"
+            value={search}
+            onChange={handleSearch}
+          />
+          <i class="bi bi-search"></i>
+        </div>
+        <button
+          className="btn btn-info"
+          onClick={() => {
+            navigator("/article_add");
+          }}
+        >
+          Add article
+        </button>
         <div className="row">
-          {articles.map((article, i) => {
-            return<DisplayEditArticle elem={article} key={i} />;
+          {found.map((article, i) => {
+            return <DisplayEditArticle elem={article} key={i} removeArticle={removeArticle}/>;
           })}
-          
         </div>
       </div>
     </>
