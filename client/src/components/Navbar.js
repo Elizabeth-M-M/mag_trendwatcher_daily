@@ -8,6 +8,7 @@ const Navbar = ({user, onLogout}) => {
     fetch("/logout", {
       method: "DELETE",
     }).then(() => onLogout());
+    navigator('/')
   }
   return (
     <nav className="navbar" id="navtitle">
