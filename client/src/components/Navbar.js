@@ -21,9 +21,14 @@ const Navbar = ({user, onLogout}) => {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-item pe-4">
-            <Link to="/category">Category</Link>
+            <Link to="/category">
+              {!user
+                ? "More News"
+                : user.username !== "editor"
+                ? "More News"
+                : "Articles"}
+            </Link>
           </li>
-          
         </ul>
         <p>
           {!user ? (

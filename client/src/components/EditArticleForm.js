@@ -47,7 +47,6 @@ const EditArticleForm = ({ articleToEdit}) => {
 
   return (
     <div className="page-min-height">
-      <h2 className=" theme-color">Add Article</h2>
       <div className="container">
         <div className="col-12 m-auto mt-3">
           <form

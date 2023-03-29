@@ -53,67 +53,80 @@ const DisplayArticle = ({ user, articleToEdit }) => {
     }
   }
   // console.log(comment)
+
+  let reviewForm = (
+    <div>
+      <h6>Leave a Review</h6>
+
+      <form onSubmit={handleReview}>
+        <div class="d-flex">
+          <div class="content text-center">
+            <div class="stars">
+              <i class="bi bi-star"></i>
+              <i class="bi bi-star"></i>
+              <i class="bi bi-star"></i>
+              <i class="bi bi-star"></i>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1"></label>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            name="comment"
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-info">
+          Post
+        </button>
+      </form>
+    </div>
+  );
   return (
     <>
       <div>
-        <button
-          className="btn btn-info"
-          onClick={() => {
-            articleToEdit(oneArticle);
-            navigator("/article_edit");
-          }}
-        >
-          Edit
-        </button>
+        {!user ? null : user.username !== "editor" ? null : (
+          <button
+            className="btn btn-info"
+            onClick={() => {
+              articleToEdit(oneArticle);
+              navigator("/article_edit");
+            }}
+          >
+            Edit
+          </button>
+        )}
+
         <h3>{oneArticle.title}</h3>
         <p className="p-2 fw-bold">{oneArticle.part1}</p>
         <p className="p-2">{oneArticle.part2}</p>
         <img src={oneArticle.image} alt="" />
         <p className="p-2">{oneArticle.part3}</p>
       </div>
-      <div>
-        <h6>Leave a Review</h6>
+      {!user
+        ? reviewForm
+        : user.username !== "editor"
+        ? reviewForm
+        : null}
 
-        <form onSubmit={handleReview}>
-          <div class="d-flex">
-            <div class="content text-center">
-              <div class="stars">
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
+     
+      <div>
+        {reviews.length === 0 ? (
+          <h6>No reviews done for this article</h6>
+        ) : (
+          reviews.map((review, ind) => {
+            return (
+              <div key={ind}>
+                <h6>{review.user.username}</h6>
+                <p>{review.comment}</p>
               </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1"></label>
-            <textarea
-              class="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              name="comment"
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-            ></textarea>
-          </div>
-          <button type="submit" class="btn btn-info">
-            Post
-          </button>
-        </form>
-        <div>
-          {reviews.length === 0 ? (
-            <h6>No reviews done for this article</h6>
-          ) : (
-            reviews.map((review, ind) => {
-              return (
-                <div key={ind}>
-                  <h6>{review.user.username}</h6>
-                  <p>{review.comment}</p>
-                </div>
-              );
-            })
-          )}
-        </div>
+            );
+          })
+        )}
       </div>
     </>
   );
