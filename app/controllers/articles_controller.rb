@@ -3,7 +3,9 @@ class ArticlesController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :invalid_article_credentials
 
   def index 
-    render json: Article.all, each_serializer:ArticlePlusContentSerializer
+    # Article.order(created_at: :desc)
+    articles= Article.all.order(created_at: :desc)
+    render json: articles, each_serializer:ArticlePlusContentSerializer
   end
   def show
     article= find_article

@@ -12,7 +12,7 @@ const Category = ({
   removeArticle,
   categoryBtns,
   setCategory,
-  category
+  category,
 }) => {
   const [search, setSearch] = useState("");
   const navigator = useNavigate();
@@ -48,7 +48,7 @@ const Category = ({
         articles[i]
       );
       i++;
-    } while (i < 10);
+    } while (i < 17);
   } else {
     selectedArticles = articles.filter((article) => {
       if (category === article.category) {
@@ -58,41 +58,52 @@ const Category = ({
   }
   //  console.log(selectedArticles)
 
-  let leftArticles = selectedArticles.slice(0, 4).map((article, i) => {
+  let leftArticles = selectedArticles.slice(0, 3).map((article, i) => {
     return <ArticleImage elem={article} key={i} />;
   });
-    let rightArticles = selectedArticles.slice(4, 8).map((article, i) => {
-      return <ArticleImage2 elem={article} key={i} />;
-    });
+  let rightArticles = selectedArticles.slice(3, 6).map((article, i) => {
+    return <ArticleImage2 elem={article} key={i} />;
+  });
   // console.log(category)
   // console.log(user);
   let userView = (
     <>
-      <div>
-        {categoryBtns.map((btn) => {
-          return <CategoryBtn key={btn} btn={btn} setCategory={setCategory} />;
-        })}
+      <div className="container p-3">
+        <div className="row">
+          {categoryBtns.map((btn) => {
+            return (
+              <CategoryBtn key={btn} btn={btn} setCategory={setCategory} />
+            );
+          })}
+        </div>
       </div>
-      <div class="container article-bg">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="row">
-              <div className="col">
-                {leftArticles}
-                </div>
-              <div className="col">
-                {rightArticles}
-                </div>
+      <div className="theme-bg-modified">
+        <div className="container article-bg p-4">
+          <h2 className="theme-light-mellow-color text-uppercase text-center display-5">
+            {category === "All" ? "All articles" : `${category} TODAY`}
+          </h2>
+          <div className="row">
+            <div className="col-md-8">
+              <div className="row">
+                <div className="col">{leftArticles}</div>
+                <div className="col">{rightArticles}</div>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-4">
-            {selectedArticles.length <= 5 ? null : <h6>More News</h6>}
-            {selectedArticles.length < 5
-              ? null
-              : selectedArticles.slice(6, 10).map((article, i) => {
-                  return <ArticleText elem={article} key={i} />;
-                })}
+            <div className="col-md-4">
+              {selectedArticles.length <= 8 ? null : (
+                <h6 className="theme-light-mellow-color">
+                  MORE
+                </h6>
+              )}
+              {selectedArticles.length < 8
+                ? null
+                : selectedArticles
+                    .slice(8, selectedArticles.length + 1)
+                    .map((article, i) => {
+                      return <ArticleText elem={article} key={i} />;
+                    })}
+            </div>
           </div>
         </div>
       </div>
@@ -100,35 +111,41 @@ const Category = ({
   );
   let editorView = (
     <>
-      <div className="container">
-        <div className="ui large fluid icon input py-5">
-          <input
-            className="p-2"
-            type="text"
-            placeholder="Search for an article"
-            value={search}
-            onChange={handleSearch}
-          />
-          <i class="bi bi-search"></i>
-        </div>
-        <button
-          className="btn btn-info"
-          onClick={() => {
-            navigator("/article_add");
-          }}
-        >
-          Add article
-        </button>
-        <div className="row">
-          {found.map((article, i) => {
-            return (
-              <DisplayEditArticle
-                elem={article}
-                key={i}
-                removeArticle={removeArticle}
+      <div className="theme-bg-modified">
+        <div className="container pt-3">
+          <div className="row">
+            <div className="ui large fluid icon input col-6">
+              <input
+                className="p-2"
+                type="text"
+                placeholder="Search by name or category"
+                value={search}
+                onChange={handleSearch}
               />
-            );
-          })}
+              <i className="bi bi-search theme-light-mellow-color fw-bolder ms-4 display-6"></i>
+            </div>
+            <div className="col-6">
+              <button
+                className="btn-style"
+                onClick={() => {
+                  navigator("/article_add");
+                }}
+              >
+                Add article
+              </button>
+            </div>
+          </div>
+          <div className="editor-row">
+            {articles.map((article, i) => {
+              return (
+                <DisplayEditArticle
+                  elem={article}
+                  key={i}
+                  removeArticle={removeArticle}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

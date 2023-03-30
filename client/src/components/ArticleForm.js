@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const ArticleForm = () => {
+const ArticleForm = ({ onArticleAdd }) => {
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
 
@@ -20,7 +20,7 @@ const ArticleForm = () => {
       [name]: value,
     });
   }
-    // console.log(articleFormData);
+  // console.log(articleFormData);
   function handleSubmit(event) {
     event.preventDefault();
     // console.log(articleFormData)
@@ -34,16 +34,16 @@ const ArticleForm = () => {
     }).then((r) => {
       if (r.ok) {
         r.json().then((article) => {
-          console.log(article)
+          onArticleAdd(article);
           setArticleFormData({
             title: "",
             content: "",
             image: "",
             category: "",
           });
-          navigator(`/articles/${article.id}`);
+          navigator(`/`);
+          // navigator(`/articles/${article.id}`);
         });
-        
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -51,12 +51,11 @@ const ArticleForm = () => {
   }
 
   return (
-    <div className="page-min-height">
-      <h2 className=" theme-color">Add Article</h2>
+    <div className="form-body">
       <div className="container">
         <div className="col-12 m-auto mt-3">
           <form
-            className="row g-3 needs-validation"
+            className="row g-3 needs-validation text-light pt-5"
             onSubmit={handleSubmit}
             novalidate
           >
@@ -88,11 +87,11 @@ const ArticleForm = () => {
                 required
               />
             </div>
-            <div class="form-group col-12">
+            <div className="form-group col-12">
               <label for="category">Category</label>
               <select
                 id="category"
-                class="form-control"
+                className="form-control"
                 onChange={handleInputs}
                 name="category"
                 value={articleFormData.category}
@@ -107,10 +106,10 @@ const ArticleForm = () => {
                 <option>Science</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="content"></label>
+            <div className="form-group">
+              <label for="content">Content</label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="content"
                 rows="5"
                 name="content"
@@ -120,7 +119,7 @@ const ArticleForm = () => {
             </div>
 
             <div className="col-12">
-              <button type="submit" className="btn btn-info">
+              <button type="submit" className="btn-style">
                 Add Article
               </button>
             </div>

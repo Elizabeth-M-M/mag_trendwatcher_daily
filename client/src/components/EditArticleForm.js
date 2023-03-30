@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const EditArticleForm = ({ articleToEdit}) => {
+const EditArticleForm = ({ articleToEdit }) => {
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
   console.log(articleToEdit);
@@ -46,11 +46,11 @@ const EditArticleForm = ({ articleToEdit}) => {
   }
 
   return (
-    <div className="page-min-height">
+    <div className="form-body">
       <div className="container">
         <div className="col-12 m-auto mt-3">
           <form
-            className="row g-3 needs-validation"
+            className="row g-3 needs-validation text-light pt-5"
             onSubmit={handleSubmit}
             novalidate
           >
@@ -82,11 +82,11 @@ const EditArticleForm = ({ articleToEdit}) => {
                 required
               />
             </div>
-            <div class="form-group col-12">
+            <div className="form-group col-12">
               <label for="category">Category</label>
               <select
                 id="category"
-                class="form-control"
+                className="form-control"
                 onChange={handleInputs}
                 name="category"
                 value={articleFormData.category}
@@ -101,10 +101,10 @@ const EditArticleForm = ({ articleToEdit}) => {
                 <option>Science</option>
               </select>
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="content"></label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="content"
                 rows="5"
                 name="content"
@@ -114,7 +114,7 @@ const EditArticleForm = ({ articleToEdit}) => {
             </div>
 
             <div className="col-12">
-              <button type="submit" className="btn btn-info">
+              <button type="submit" className="btn-style">
                 Edit Article
               </button>
             </div>

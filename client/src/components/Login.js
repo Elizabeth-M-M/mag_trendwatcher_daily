@@ -23,13 +23,13 @@ const Login = ({ handleUser }) => {
   // This POST request creates a user on the database and logs in a user to the program
   function handleSubmit(event) {
     event.preventDefault();
-     let userSession;
-     if (isChecked == true) {
-       userSession = "editor";
-     } else {
-       userSession = "user";
-     }
-     console.log(userSession)
+    let userSession;
+    if (isChecked == true) {
+      userSession = "editor";
+    } else {
+      userSession = "user";
+    }
+    console.log(userSession);
 
     fetch(`/login/${userSession}`, {
       method: "POST",
@@ -54,17 +54,20 @@ const Login = ({ handleUser }) => {
   }
 
   return (
-    <div className="page-min-height text-center">
-      <h2 className=" theme-color">Log In</h2>
+    <div className="text-center form-body">
       <div className="container">
-        <div className="col-6 m-auto mt-5">
+        <div className="py-5"></div>
+        <div className="col-6 m-auto">
           <form
-            className="row g-3 needs-validation"
+            className="row g-3 needs-validation faded-bg-light "
             onSubmit={handleSubmit}
             novalidate
           >
             <div className="col-md-6">
-              <label htmlFor="username" className="form-label">
+              <label
+                htmlFor="username"
+                className="form-label text-dark fw-bold"
+              >
                 Username
               </label>
               <input
@@ -78,7 +81,10 @@ const Login = ({ handleUser }) => {
               />
             </div>
             <div className="col-md-6">
-              <label htmlFor="password" className="form-label">
+              <label
+                htmlFor="password"
+                className="form-label text-dark fw-bold"
+              >
                 Password
               </label>
               <input
@@ -91,22 +97,25 @@ const Login = ({ handleUser }) => {
                 required
               />
             </div>
-            <div class="col-12">
-              <div class="form-check">
+            <div className="col-6 m-auto pt-4">
+              <div className="form-check">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   id="gridCheck"
                   onChange={handleInputs}
                 />
-                <label class="form-check-label" for="gridCheck">
+                <label
+                  className="form-check-label text-dark fw-bold"
+                  for="gridCheck"
+                >
                   Sign in as Editor
                 </label>
               </div>
             </div>
             <Link to="/signup">Don't have an account?</Link>
             <div className="col-12">
-              <button type="submit" className="btn btn-info">
+              <button type="submit" className="btn-style">
                 Log in
               </button>
             </div>

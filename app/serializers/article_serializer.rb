@@ -1,6 +1,7 @@
 class ArticleSerializer < ActiveModel::Serializer
   attributes :id, :image, :title, :category, :part1, :part2, :part3, :content
   has_many :reviews
+  
   def part1
     (self.object.content.split('. ')).slice(0, 3).join('. ')
     # "#{self.object.content[0..500]}"

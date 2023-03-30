@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({handleUser}) => {
+const Signup = ({ handleUser }) => {
   const navigator = useNavigate();
-  const[errors, setErrors]=useState([])
+  const [errors, setErrors] = useState([]);
 
   const [signUpFormData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
-    password_confirmation:""
+    password_confirmation: "",
   });
 
   function handleInputs(event) {
@@ -29,31 +29,29 @@ const Signup = ({handleUser}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(signUpFormData),
-    })
-      .then((r) => {
-        if(r.ok){
-          r.json().then((user) => handleUser(user));
-          setFormData({
-            username: "",
-            email: "",
-            password: "",
-            password_confirmation: "",
-          });
-          navigator("/");
-        }else{
-          r.json().then(err=>setErrors(err.errors))
-
-        }
-      })
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => handleUser(user));
+        setFormData({
+          username: "",
+          email: "",
+          password: "",
+          password_confirmation: "",
+        });
+        navigator("/");
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
   }
 
   return (
-    <div className="page-min-height text-center">
+    <div className="text-center form-body">
       <h2 className=" theme-color">Sign Up</h2>
       <div className="container">
         <div className="col-6 m-auto mt-5">
           <form
-            className="row g-3 needs-validation"
+            className="row g-3 needs-validation faded-bg-light fw-bold"
             onSubmit={handleSubmit}
             novalidate
           >
@@ -115,11 +113,15 @@ const Signup = ({handleUser}) => {
             </div>
             <Link to="/login">Already have an account?</Link>
             <div className="col-12">
-              <button type="submit" className="btn btn-info">
+              <button type="submit" className="btn-style">
                 Sign Up
               </button>
             </div>
-            <ul>{errors.length > 0 ? errors.map(err=>(<li key={err}>{err}</li>)) : null}</ul>
+            <ul>
+              {errors.length > 0
+                ? errors.map((err) => <li key={err}>{err}</li>)
+                : null}
+            </ul>
           </form>
         </div>
       </div>

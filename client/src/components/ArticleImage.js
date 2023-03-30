@@ -1,79 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const ArticleImage = ({elem}) => {
+const ArticleImage = ({ elem }) => {
+   const navigator = useNavigate();
   return (
-    <div class="">
-      <h4>{elem.title}</h4>
-      <h6>{elem.category}</h6>
-      <p>{elem.summary}</p>
-      <Link to={`/articles/${elem.id}`}>More</Link>
-      {elem.id % 2 == 0 ? null : (
-        <div class="image-holder">
-          <img src={elem.image} alt={elem.title} />
+    <div
+      className="header-bottom-card"
+      onClick={() => {
+        navigator(`/articles/${elem.id}`);
+      }}
+      style={{ cursor: "pointer" }}
+    >
+      {elem.id % 2 !== 0 ? null : (
+        <div className="image-holder">
+          <img src={elem.image} alt={elem.part_title} />
         </div>
       )}
+      <div className="p-3">
+        <small className="theme-light text-uppercase pb-2">
+          {elem.category}
+        </small>
+        <h4 className="theme-light-mellow-color">{elem.part_title}</h4>
+
+        <small className="theme-light ">{elem.summary}</small>
+        <div className="mt-3">
+          <i class="bi bi-list me-2 fw-bold text-light"></i>
+          <Link to={`/articles/${elem.id}`} className="category-link">
+            READ
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default ArticleImage;
-{
-  /* <div class="news-container float-md-start">
-  <h4>{elem.title}</h4>
-  <h6>{elem.category}</h6>
-  <p>{elem.summary}</p>
-  <Link to={`/articles/${elem.id}`}>More</Link>
-  <div class="image-holder">
-    <img src={elem.image} alt={elem.title} />
-  </div>
-</div>; */
-}
-
-
-//  <div className="row">
-//   <div className="col bg-warning">
-//     <div class="">
-//       <h4>1some title</h4>
-//       <p>
-//         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit reiciendis
-//         non, modi placeat laborum magnam perspiciatis commodi...
-//       </p>
-//       <button className="btn btn-info">more</button>
-//       <div class="image-holder">
-//         <img src="https://images.pexels.com/photos/5346060/pexels-photo-5346060.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
-//       </div>
-//     </div>
-//     <div class="">
-//       <h4>1some title</h4>
-//       <p>
-//         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit reiciendis
-//         non, modi placeat laborum magnam perspiciatis commodi...
-//       </p>
-//       <button className="btn btn-info">more</button>
-      
-//     </div>
-//   </div>
-//   <div className="col bg-success">
-//     <div class="">
-//       <h4>3some title</h4>
-//       <p>
-//         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit reiciendis
-//         non, modi placeat laborum magnam perspiciatis commodi...
-//       </p>
-//       <button className="btn btn-info">more</button>
-     
-//     </div>
-//     <div class="">
-//       <h4>1some title</h4>
-//       <p>
-//         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit reiciendis
-//         non, modi placeat laborum magnam perspiciatis commodi...
-//       </p>
-//       <button className="btn btn-info">more</button>
-//       <div class="image-holder">
-//         <img src="https://images.pexels.com/photos/5346060/pexels-photo-5346060.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
-//       </div>
-//     </div>
-//   </div>
-// </div>

@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router';
-import './App.css'
-import { useNavigate } from 'react-router';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import "./App.css";
+import { useNavigate } from "react-router";
 
 const DisplayArticle = ({ user, articleToEdit }) => {
   const navigator = useNavigate();
@@ -9,7 +9,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState([]);
   let { id } = useParams();
-  console.log(id)
+  // console.log(id);
 
   useEffect(() => {
     fetch(`/articles/${id}`).then((res) => {
@@ -22,12 +22,13 @@ const DisplayArticle = ({ user, articleToEdit }) => {
     });
   }, []);
   // console.log(reviews)
+  // console.log(user)
 
   function handleReview(e) {
     e.preventDefault();
 
-    if (user === null) {
-      navigator("/login");
+    if (user === null|| user===undefined) {
+      return navigator("/login");
     } else {
       let reviewFormData = {
         comment,
@@ -56,24 +57,24 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   // console.log(comment)
 
   let reviewForm = (
-    <div>
-      <h6>Leave a Review</h6>
+    <div className="container">
+      <h5 className="theme-dark-mellow-color">Leave a Review</h5>
 
       <form onSubmit={handleReview}>
-        <div class="d-flex">
-          <div class="content text-center">
-            <div class="stars">
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
+        {/* <div className="d-flex">
+          <div className="content text-center">
+            <div className="stars">
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
             </div>
           </div>
-        </div>
-        <div class="form-group">
+        </div> */}
+        <div className="form-group col-8">
           <label for="exampleFormControlTextarea1"></label>
           <textarea
-            class="form-control"
+            className="form-control"
             id="exampleFormControlTextarea1"
             rows="3"
             name="comment"
@@ -81,49 +82,84 @@ const DisplayArticle = ({ user, articleToEdit }) => {
             onChange={(event) => setComment(event.target.value)}
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-info">
-          Post
+        <button type="submit" className="btn-style my-3">
+          POST
         </button>
       </form>
     </div>
   );
   return (
     <>
-      <div>
+      <div className="container">
         {!user ? null : user.username !== "editor" ? null : (
-          <button
-            className="btn btn-info"
-            onClick={() => {
-              articleToEdit(oneArticle);
-              navigator("/article_edit");
-            }}
-          >
-            Edit
-          </button>
+          <div className="m-auto text-center mb-2">
+            <button
+              className="btn-style "
+              onClick={() => {
+                articleToEdit(oneArticle);
+                navigator("/article_edit");
+              }}
+            >
+              Edit
+            </button>
+          </div>
         )}
-
-        <h3>{oneArticle.title}</h3>
-        <p className="p-2 fw-bold">{oneArticle.part1}</p>
-        <p className="p-2">{oneArticle.part2}</p>
-        <img src={oneArticle.image} alt="" />
-        <p className="p-2">{oneArticle.part3}</p>
       </div>
-      {!user
-        ? reviewForm
-        : user.username !== "editor"
-        ? reviewForm
-        : null}
+      <div className="row display-article theme-bg-modified">
+        <div className="col-6 display-article-img">
+          <img src={oneArticle.image} alt="" />
+        </div>
+        <div
+          className="col-6 d-flex justify-content-center
+        align-items-center"
+        >
+          <div className="col-6">
+            <small className="theme-light text-uppercase">
+              {oneArticle.category}
+            </small>
+            <h3 className="theme-light-mellow-color">{oneArticle.title}</h3>
+            <small className="pt-2 theme-light">{oneArticle.part1}</small>
+          </div>
+        </div>
+      </div>
+      <div className="container pt-4">
+        <div className="d-flex align-items-center">
+          <h1 className="display-1 theme-bg theme-light-mellow-color rounded-circle px-3 me-3">
+            T
+          </h1>
+          <div className="theme-dark-mellow-color">
+            <h4>By Trend Team</h4>
+            <h4>Trend Watchers Daily</h4>
+          </div>
+        </div>
 
-     
-      <div>
+        <div className="col-8">
+          <p className="pt-2">{oneArticle.part2}</p>
+
+          <p className="pt-2">{oneArticle.part3}</p>
+        </div>
+      </div>
+      {!user ? reviewForm : user.username !== "editor" ? reviewForm : null}
+
+      <div className="theme-bg-modified">
         {reviews.length === 0 ? (
-          <h6>No reviews done for this article</h6>
+          <div className="container">
+            <h6 className="theme-light py-3">Be the first to review</h6>
+          </div>
         ) : (
           reviews.map((review, ind) => {
             return (
-              <div key={ind}>
-                <h6>{review.user.username}</h6>
-                <p>{review.comment}</p>
+              <div key={ind} className="container">
+                <div className="d-flex align-items-center p-3 faded-bg col-5 my-3">
+                  <i class="bi bi-person-lines-fill display-6 me-4 theme-light-mellow-color"></i>
+
+                  <div className="">
+                    <h6 className="theme-light-mellow-color">
+                      {review.user.username}
+                    </h6>
+                    <p className="theme-light">{review.comment}</p>
+                  </div>
+                </div>
               </div>
             );
           })
@@ -133,4 +169,4 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   );
 };
 
-export default DisplayArticle
+export default DisplayArticle;

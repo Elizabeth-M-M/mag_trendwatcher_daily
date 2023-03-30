@@ -5,169 +5,208 @@ import { useNavigate } from "react-router-dom";
 import CategoryBtn from "./CategoryBtn";
 import ArticleImage2 from "./ArticleImage2";
 
-
 const Home = ({ user, articles, categoryBtns, setCategory }) => {
   const navigator = useNavigate();
-  const [headerArticle, setHeaderArticle] = useState({});
 
-  useEffect(() => {
-    if (articles.length > 0) {
-      setHeaderArticle(articles.slice(-1)[0]);
-    }
-  }, []);
-
-   let leftArticles = articles.slice(0, 4).map((article, i) => {
-     return <ArticleImage elem={article} key={i} />;
-   });
-   let rightArticles = articles.slice(4, 8).map((article, i) => {
-     return <ArticleImage2 elem={article} key={i} />;
-   });
+  let leftArticles = articles.slice(9, 13).map((article, i) => {
+    return <ArticleImage elem={article} key={i} />;
+  });
+  let rightArticles = articles.slice(13, 17).map((article, i) => {
+    return <ArticleImage2 elem={article} key={i} />;
+  });
   let userHomePage = (
-    <div>
-      <div class="header">
-        <div class="row">
-          <div class="col-md-8 header-content">
-            <div class="image-holder-header">
-              <img
-                src={
-                  articles.length === 0
-                    ? "https://t.ly/_JOz"
-                    : headerArticle.image
-                }
-                alt=""
-              />
-            </div>
-            <div class="header-floater bg-light p-4">
-              <h6>
-                {articles.length === 0 ? "Lifestyle" : headerArticle.category}
-              </h6>
-              <h3>
-                {articles.length === 0
-                  ? "A Walk to Remember"
-                  : headerArticle.title}
-              </h3>
-              <button class="btn btn-info">Read More</button>
-            </div>
-          </div>
+    <>
+      <div className="theme-bg-modified">
+        <div className="container p-2">
+          {user ? (
+            <p className="theme-light fw-bold">Welcome, {user.username}</p>
+          ) : null}
+          <h1 className="display-3 text-center fw-bold theme-light-mellow-color">
+            LATEST STORIES
+          </h1>
+          <p className="text-center theme-light header-font">
+            Subscribe for more
+          </p>
+          <div className="header">
+            <div className="row">
+              <div className="col-md-8 header-content">
+                <div className="position-relative">
+                  <div className="image-holder-header">
+                    <img
+                      src={
+                        articles.length === 0
+                          ? "https://t.ly/_JOz"
+                          : articles.slice(0, 1)[0].image
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <div className="header-floater p-4">
+                    <h6>
+                      {articles.length === 0
+                        ? "Lifestyle"
+                        : articles.slice(0, 1)[0].category}
+                    </h6>
+                    <h3>
+                      {articles.length === 0
+                        ? "A Walk to Remember"
+                        : articles.slice(0, 1)[0].part_title}
+                    </h3>
+                    <div>
+                      <i class="bi bi-list fw-bold"></i>
+                      <button
+                        className="btn-read"
+                        onClick={() => {
+                          navigator(`/articles/${articles.slice(0, 1)[0].id}`);
+                        }}
+                      >
+                        READ
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-          <div class="col-md-4">
-            <h6>Recent News</h6>
-            {articles.slice(6, 10).map((article, i) => {
-              return <ArticleText elem={article} key={i} />;
-            })}
-            
+                <div className="d-sm-flex d-block gap-3 mt-4">
+                  <div className="card-size bg-light ">
+                    <div className="card-image-top">
+                      <img
+                        src={
+                          articles.length === 0
+                            ? "https://t.ly/_JOz"
+                            : articles.slice(1, 2)[0].image
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="p-2 ps-3">
+                      <small>
+                        {articles.length === 0
+                          ? "Lifestyle"
+                          : articles.slice(1, 2)[0].category}
+                      </small>
+                      <h4>
+                        {articles.length === 0
+                          ? "A Walk to Remember"
+                          : articles.slice(1, 2)[0].part_title}
+                      </h4>
+                      <div>
+                        <i class="bi bi-list fw-bold"></i>
+                        <button
+                          className="btn-read"
+                          onClick={() => {
+                            navigator(
+                              `/articles/${articles.slice(1, 2)[0].id}`
+                            );
+                          }}
+                        >
+                          READ
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-size bg-light ">
+                    <div className="card-image-top">
+                      <img
+                        src={
+                          articles.length === 0
+                            ? "https://t.ly/_JOz"
+                            : articles.slice(2, 3)[0].image
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="p-2 ps-3">
+                      <small>
+                        {articles.length === 0
+                          ? "Lifestyle"
+                          : articles.slice(2, 3)[0].category}
+                      </small>
+                      <h4>
+                        {articles.length === 0
+                          ? "A Walk to Remember"
+                          : articles.slice(2, 3)[0].part_title}
+                      </h4>
+                      <div>
+                        <i class="bi bi-list fw-bold"></i>
+                        <button
+                          className="btn-read"
+                          onClick={() => {
+                            navigator(
+                              `/articles/${articles.slice(2, 3)[0].id}`
+                            );
+                          }}
+                        >
+                          READ
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <h4 className="theme-light fw-bold">LATEST STORIES</h4>
+                {articles.slice(3, 8).map((article, i) => {
+                  return <ArticleText elem={article} key={i} />;
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        {categoryBtns.map((btn) => {
-          return <CategoryBtn key={btn} btn={btn} setCategory={setCategory} />;
-        })}
+      <div className="container p-3">
+        <h6 className="text-center">CATEGORIES</h6>
+        <div className="row">
+          {categoryBtns.map((btn) => {
+            return (
+              <CategoryBtn key={btn} btn={btn} setCategory={setCategory} />
+            );
+          })}
+        </div>
       </div>
-      <div class="row">
-        <div className="col">{leftArticles}</div>
-        <div className="col">{rightArticles}</div>
+      <div className="theme-bg-modified">
+        <div className="container p-4">
+          <h2 className="theme-light-mellow-color display-4 text-center">
+            IN OTHER NEWS
+          </h2>
+          <div className="row">
+            <div className="col">{leftArticles}</div>
+            <div className="col">{rightArticles}</div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
+
   let editorHomePage = (
-    <div>
-      <h3
-        onClick={() => {
-          navigator("/category");
-        }}
-        style={{ cursor: "pointer" }}
-      >
-        View Articles
-      </h3>
-    </div>
+    <>
+      <div className="editor-form-body ">
+        <div className="container">
+          {user ? (
+            <p className="theme-light pt-3 fw-bold">Welcome, {user.username}</p>
+          ) : null}
+        </div>
+        <div className="d-flex align-items-center justify-content-center">
+          <h3 className="text-light text-center">
+            CREATOR'S <br /> WORLD
+          </h3>
+        </div>
+      </div>
+    </>
   );
 
   return (
     <>
       <div className="container">
-        {user ? <p>Welcome, {user.username}</p> : null}
-        {!user
-          ? userHomePage
-          : user.username !== "editor"
-          ? userHomePage
-          : editorHomePage}
+       
       </div>
+      {!user
+        ? userHomePage
+        : user.username !== "editor"
+        ? userHomePage
+        : editorHomePage}
     </>
   );
 };
 
 export default Home;
-{
-  /* <div class="image-holder-header">
-  <img
-    src={articles.length === 0 ? "https://t.ly/_JOz" : headerArticle.image}
-    alt=""
-  />
-</div>; */
-}
-
-{
-  /* <h6>Recent News</h6>;
-{
-  rightArticles;
-} */
-}
-
-// incase more categories
-//  <div class="container article-bg">
-//    <div class="clearfix">{/* {articlelist} */}</div>
-//  </div>;
-
-// const array = ["a", "b", "c", "d"];
-// const n = 3;
-
-// const result = array.slice(-n).slice(0, array.length - 2);
-
-// console.log(result);
-
-{
-  /* <div class="header">
-          <div class="row">
-            <div class="col-md-8 header-content">
-              <div class="image-holder-header">
-                <img
-                  src={
-                    articles.length === 0
-                      ? "https://t.ly/_JOz"
-                      : headerArticle.image
-                  }
-                  alt=""
-                />
-              </div>
-              <div class="header-floater bg-light p-4">
-                <h6>
-                  {articles.length === 0 ? "Lifestyle" : headerArticle.category}
-                </h6>
-                <h3>
-                  {articles.length === 0
-                    ? "A Walk to Remember"
-                    : headerArticle.title}
-                </h3>
-                <button class="btn btn-info">Read More</button>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <h6>Recent News</h6>
-              {  rightArticles}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container">
-        <h2
-          onClick={() => {
-            navigator("/category");
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          More News
-        </h2> */
-}

@@ -1,26 +1,26 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import './Navbar.css'
+import "./Navbar.css";
 
-const Navbar = ({user, onLogout}) => {
+const Navbar = ({ user, onLogout }) => {
   const navigator = useNavigate();
-  function handleLogout(){
+  function handleLogout() {
     fetch("/logout", {
       method: "DELETE",
     }).then(() => onLogout());
-    navigator('/')
+    navigator("/");
   }
   return (
-    <nav className="navbar" id="navtitle">
-      <h4 href="#" className="theme-color me-3">
-        Logo
+    <nav className="navbar container" id="navtitle">
+      <h4 href="#" className="theme-dark-mellow-color display-4 header-font">
+        TWD
       </h4>
       <div className="right-nav">
-        <ul className="menu-list">
-          <li className="nav-item pe-4">
+        <div className="d-flex">
+          <p className="me-4">
             <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item pe-4">
+          </p>
+          <p className="me-4">
             <Link to="/category">
               {!user
                 ? "More News"
@@ -28,12 +28,12 @@ const Navbar = ({user, onLogout}) => {
                 ? "More News"
                 : "Articles"}
             </Link>
-          </li>
-        </ul>
+          </p>
+        </div>
         <p>
           {!user ? (
             <button
-              className="btn btn-info"
+              className="btn-style"
               onClick={() => {
                 navigator("/login");
               }}
@@ -41,7 +41,7 @@ const Navbar = ({user, onLogout}) => {
               Login
             </button>
           ) : (
-            <button className="btn btn-info" onClick={handleLogout}>
+            <button className="btn-style" onClick={handleLogout}>
               Logout
             </button>
           )}
@@ -52,5 +52,3 @@ const Navbar = ({user, onLogout}) => {
 };
 
 export default Navbar;
-
-

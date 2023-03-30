@@ -13,7 +13,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
   const[articleToEdit, setArticleToEdit]=useState(null)
- console.log(user)
+//  console.log(user)
  const categoryBtns = [
    "All",
    "Lifestyle",
@@ -49,9 +49,15 @@ const App = () => {
      let sortedArticles = allArticles.filter((article) => article.id !== id);
      setAllArticles(sortedArticles)
   }
+  function handleArticleAdd(article){
+
+          setAllArticles([...allArticles, article]);
+
+  }
+  console.log(allArticles.length)
 
   return (
-    <div className="container">
+    <div>
       <Navbar user={user} onLogout={setUser} />
       <Routes>
         <Route
@@ -66,7 +72,7 @@ const App = () => {
           }
         ></Route>
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
-        <Route path="/article_add" element={<ArticleForm />}></Route>
+        <Route path="/article_add" element={<ArticleForm  onArticleAdd={handleArticleAdd}/>}></Route>
         <Route
           path="/article_edit"
           element={<EditArticleForm articleToEdit={articleToEdit} />}
