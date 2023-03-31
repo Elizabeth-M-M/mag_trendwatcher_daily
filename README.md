@@ -51,29 +51,34 @@ $ foreman start -f Procfile.dev
 ```
 6. The app should now be running on `http://localhost:4000`
 
+As a user, you can sign up and use those credentials to sign in later after logging out
+
+As an editor, these are the credentials to log in to the editor view
+- username- editor
+- password- 98765
+- check the checkbox `log in as editor`
+
 ## Screenshots of the Front End Design
  It is divided into two parts; user's view and editor's view
 
  ##### User view
 
-Homepage
-Category page
-Main article
-Sign up page 
-Sign in page
+- Homepage
+![alt text](./images/userhp.png "Trend Watcher Magazine")
+- Category page
+![alt text](./images/usercategory.png "Trend Watcher Magazine")
+- Main article
+![alt text](./images/mainarticle.png "Trend Watcher Magazine")
 
  ##### Editor view
-Homepage
-Category page
-Create article page
-Edit article page
-Main article page
-
-
-
-
-
-![alt text](./images/userhp.png "Restaurant_Pizza Model")
+- Homepage
+![alt text](./images/editorhp.png "Trend Watcher Magazine")
+- Category page
+![alt text](./images/2editorcatpg.png "Trend Watcher Magazine")
+- Create article page
+![alt text](./images/add%20articlepg.png "Trend Watcher Magazine")
+- Main article  page with an edit button
+![alt text](./images/editormainarticle.png "Trend Watcher Magazine")
 
 #### License
 Copyright (c) 2022 Elizabeth Mwende Muthusi.
