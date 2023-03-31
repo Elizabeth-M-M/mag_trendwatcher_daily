@@ -4,6 +4,7 @@ import ArticleImage from "./ArticleImage";
 import { useNavigate } from "react-router-dom";
 import CategoryBtn from "./CategoryBtn";
 import ArticleImage2 from "./ArticleImage2";
+import Footer from "./Footer";
 
 const Home = ({ user, articles, categoryBtns, setCategory }) => {
   const navigator = useNavigate();
@@ -207,6 +208,7 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
         : user.username !== "editor"
         ? userHomePage
         : editorHomePage}
+        <Footer/>
     </>
   );
 };

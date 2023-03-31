@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import "./App.css";
 import { useNavigate } from "react-router";
+import Footer from "./Footer";
 
 const DisplayArticle = ({ user, articleToEdit }) => {
   const navigator = useNavigate();
@@ -164,8 +165,8 @@ const DisplayArticle = ({ user, articleToEdit }) => {
             ) : (
               reviews.map((review, ind) => {
                 return (
-                  <div key={ind} className="container">
-                    <div className="d-flex align-items-center p-3 faded-bg col-5 my-3">
+                  <div key={ind} className="container p-2">
+                    <div className="d-flex align-items-center p-3 faded-bg col-5 mt-3">
                       <i class="bi bi-person-lines-fill display-6 me-4 theme-light-mellow-color"></i>
 
                       <div className="">
@@ -182,6 +183,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
           </div>
         </>
       )}
+      <Footer/>
     </>
   );
 };

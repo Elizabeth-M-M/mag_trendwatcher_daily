@@ -9,6 +9,7 @@ import Category from "./Category";
 import DisplayArticle from "./DisplayArticle";
 import ArticleForm from "./ArticleForm";
 import EditArticleForm from "./EditArticleForm";
+import Footer from "./Footer";
 const App = () => {
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
@@ -98,6 +99,7 @@ const App = () => {
         ></Route>
         <Route path="/signup" element={<Signup handleUser={setUser} />}></Route>
       </Routes>
+    
     </div>
   );
 };

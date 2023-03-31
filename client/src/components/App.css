@@ -8,6 +8,7 @@
   --colwhite: #fff;
   --colblack: rgb(0, 0, 0);
   --coldarkmellow: rgb(133, 94, 10);
+  
   --colgradient: linear-gradient(150deg, rgba(83, 153, 135, 1) 0%, rgba(254, 254, 254, 1) 100%);
 
   --button-padding: 0.5rem 1rem;
@@ -272,9 +273,18 @@ font-weight: 700;
 }
 .error-list{
   list-style: none;
-  color: rgb(216, 0, 0);
+  color: rgb(221, 206, 206);
 }
-
+.footer{
+  background: var(--coldarkmellow);
+}
+.footer .bi {
+  background-color: var(--coldark);
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 @media only screen and (max-width: 576px) {
   .news-container {
     width: 100%;

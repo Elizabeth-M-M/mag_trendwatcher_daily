@@ -5,6 +5,7 @@ import CategoryBtn from "./CategoryBtn";
 import DisplayEditArticle from "./DisplayEditArticle";
 import { useNavigate } from "react-router";
 import ArticleImage2 from "./ArticleImage2";
+import Footer from "./Footer";
 
 const Category = ({
   articles,
@@ -152,7 +153,10 @@ const Category = ({
   );
 
   return (
-    <>{!user ? userView : user.username !== "editor" ? userView : editorView}</>
+    <>
+      {!user ? userView : user.username !== "editor" ? userView : editorView}
+      <Footer/>
+    </>
   );
 };
 
