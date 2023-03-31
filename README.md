@@ -61,7 +61,7 @@ As an editor, these are the credentials to log in to the editor view
 ## Screenshots of the Front End Design
  It is divided into two parts; user's view and editor's view
 
- ##### User view
+ ### User view
 
 - Homepage
 ![alt text](./images/userhp.png "Trend Watcher Magazine")
@@ -70,7 +70,7 @@ As an editor, these are the credentials to log in to the editor view
 - Main article
 ![alt text](./images/mainarticle.png "Trend Watcher Magazine")
 
- ##### Editor view
+ ### Editor view
 - Homepage
 ![alt text](./images/editorhp.png "Trend Watcher Magazine")
 - Category page
