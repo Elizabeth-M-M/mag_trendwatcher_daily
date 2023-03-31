@@ -5,7 +5,7 @@ const ArticleText = ({ elem }) => {
   const navigator = useNavigate();
   return (
     <div
-      className="my-3 row"
+      className="my-3 row card-hover"
       onClick={() => {
         navigator(`/articles/${elem.id}`);
       }}

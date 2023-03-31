@@ -1,7 +1,7 @@
 class ArticlePlusContentSerializer < ActiveModel::Serializer
   attributes :id, :image, :title, :category, :summary, :part_title
   def summary
-    "#{self.object.content[0..100]}..."
+    "#{self.object.content[0..80]}..."
 
   end
   def part_title

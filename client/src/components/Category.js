@@ -136,7 +136,7 @@ const Category = ({
             </div>
           </div>
           <div className="editor-row">
-            {articles.map((article, i) => {
+            {found.map((article, i) => {
               return (
                 <DisplayEditArticle
                   elem={article}

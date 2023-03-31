@@ -59,14 +59,14 @@ const Login = ({ handleUser }) => {
         <div className="py-5"></div>
         <div className="col-6 m-auto">
           <form
-            className="row g-3 needs-validation faded-bg-light "
+            className="row g-3 needs-validation faded-bg-light text-light"
             onSubmit={handleSubmit}
             novalidate
           >
             <div className="col-md-6">
               <label
                 htmlFor="username"
-                className="form-label text-dark fw-bold"
+                className="form-label fw-bold"
               >
                 Username
               </label>
@@ -83,7 +83,7 @@ const Login = ({ handleUser }) => {
             <div className="col-md-6">
               <label
                 htmlFor="password"
-                className="form-label text-dark fw-bold"
+                className="form-label fw-bold"
               >
                 Password
               </label>
@@ -106,7 +106,7 @@ const Login = ({ handleUser }) => {
                   onChange={handleInputs}
                 />
                 <label
-                  className="form-check-label text-dark fw-bold"
+                  className="form-check-label fw-bold"
                   for="gridCheck"
                 >
                   Sign in as Editor
@@ -121,7 +121,7 @@ const Login = ({ handleUser }) => {
             </div>
             <ul>
               {errors.length > 0
-                ? errors.map((err) => <li key={err}>{err}</li>)
+                ? errors.map((err) => <li key={err} className='error-list'>{err}</li>)
                 : null}
             </ul>
           </form>

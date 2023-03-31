@@ -47,11 +47,11 @@ const Signup = ({ handleUser }) => {
 
   return (
     <div className="text-center form-body">
-      <h2 className=" theme-color">Sign Up</h2>
       <div className="container">
+        <div className="py-5"></div>
         <div className="col-6 m-auto mt-5">
           <form
-            className="row g-3 needs-validation faded-bg-light fw-bold"
+            className="row g-3 needs-validation faded-bg-light fw-bold text-light"
             onSubmit={handleSubmit}
             novalidate
           >
@@ -119,7 +119,11 @@ const Signup = ({ handleUser }) => {
             </div>
             <ul>
               {errors.length > 0
-                ? errors.map((err) => <li key={err}>{err}</li>)
+                ? errors.map((err) => (
+                    <li key={err} className="error-list">
+                      {err}
+                    </li>
+                  ))
                 : null}
             </ul>
           </form>

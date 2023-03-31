@@ -5,7 +5,7 @@ const ArticleImage2 = ({ elem }) => {
    const navigator = useNavigate();
   return (
     <div
-      className="header-bottom-card"
+      className="header-bottom-card card-hover"
       onClick={() => {
         navigator(`/articles/${elem.id}`);
       }}
@@ -30,7 +30,6 @@ const ArticleImage2 = ({ elem }) => {
           </Link>
         </div>
       </div>
-
     </div>
   );
 };

@@ -41,7 +41,7 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
                       alt=""
                     />
                   </div>
-                  <div className="header-floater p-4">
+                  <div className="header-floater p-4 card-hover">
                     <h6>
                       {articles.length === 0
                         ? "Lifestyle"
@@ -67,7 +67,7 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
                 </div>
 
                 <div className="d-sm-flex d-block gap-3 mt-4">
-                  <div className="card-size bg-light ">
+                  <div className="card-size header-card-hover">
                     <div className="card-image-top">
                       <img
                         src={
@@ -104,7 +104,7 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="card-size bg-light ">
+                  <div className="card-size header-card-hover ">
                     <div className="card-image-top">
                       <img
                         src={
@@ -154,8 +154,10 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
           </div>
         </div>
       </div>
-      <div className="container p-3">
-        <h6 className="text-center">CATEGORIES</h6>
+      <div className="container p-5 text-center">
+        <h1 className="header-font display-4">TREND WATCHER DAILY</h1>
+        <p>Your one stop read for all your information needs</p>
+        <p>Browse our categories</p>
         <div className="row">
           {categoryBtns.map((btn) => {
             return (

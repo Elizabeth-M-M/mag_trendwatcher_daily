@@ -8,6 +8,8 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   const [oneArticle, setOneArticle] = useState({});
   const [comment, setComment] = useState("");
   const [reviews, setReviews] = useState([]);
+  const [errors, setErrors] = useState([]);
+
   let { id } = useParams();
   // console.log(id);
 
@@ -18,6 +20,8 @@ const DisplayArticle = ({ user, articleToEdit }) => {
           setOneArticle(data);
           setReviews(data.reviews);
         });
+      } else {
+        res.json().then((err) => setErrors(err.errors));
       }
     });
   }, []);
@@ -88,6 +92,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
       </form>
     </div>
   );
+  console.log(errors)
   return (
     <>
       <div className="container">
@@ -105,66 +110,78 @@ const DisplayArticle = ({ user, articleToEdit }) => {
           </div>
         )}
       </div>
-      <div className="row display-article theme-bg-modified">
-        <div className="col-6 display-article-img">
-          <img src={oneArticle.image} alt="" />
+      {errors.length !== 0 ? (
+        <div className="theme-bg-modified d-flex justify-content-center align-items-center">
+          <h2 className="text-center text-light text-capitalize header-font">
+            You need to log in to view the article
+          </h2>
         </div>
-        <div
-          className="col-6 d-flex justify-content-center
+      ) : (
+        <>
+          <div className="row display-article theme-bg-modified">
+            <div className="col-6 display-article-img">
+              <img src={oneArticle.image} alt="" />
+            </div>
+            <div
+              className="col-6 d-flex justify-content-center
         align-items-center"
-        >
-          <div className="col-6">
-            <small className="theme-light text-uppercase">
-              {oneArticle.category}
-            </small>
-            <h3 className="theme-light-mellow-color">{oneArticle.title}</h3>
-            <small className="pt-2 theme-light">{oneArticle.part1}</small>
-          </div>
-        </div>
-      </div>
-      <div className="container pt-4">
-        <div className="d-flex align-items-center">
-          <h1 className="display-1 theme-bg theme-light-mellow-color rounded-circle px-3 me-3">
-            T
-          </h1>
-          <div className="theme-dark-mellow-color">
-            <h4>By Trend Team</h4>
-            <h4>Trend Watchers Daily</h4>
-          </div>
-        </div>
-
-        <div className="col-8">
-          <p className="pt-2">{oneArticle.part2}</p>
-
-          <p className="pt-2">{oneArticle.part3}</p>
-        </div>
-      </div>
-      {!user ? reviewForm : user.username !== "editor" ? reviewForm : null}
-
-      <div className="theme-bg-modified">
-        {reviews.length === 0 ? (
-          <div className="container">
-            <h6 className="theme-light py-3">Be the first to review</h6>
-          </div>
-        ) : (
-          reviews.map((review, ind) => {
-            return (
-              <div key={ind} className="container">
-                <div className="d-flex align-items-center p-3 faded-bg col-5 my-3">
-                  <i class="bi bi-person-lines-fill display-6 me-4 theme-light-mellow-color"></i>
-
-                  <div className="">
-                    <h6 className="theme-light-mellow-color">
-                      {review.user.username}
-                    </h6>
-                    <p className="theme-light">{review.comment}</p>
-                  </div>
-                </div>
+            >
+              <div className="col-8">
+                <p className="theme-light text-uppercase fw-bold">
+                  {oneArticle.category}
+                </p>
+                <h3 className="theme-light-mellow-color mb-3">
+                  {oneArticle.title}
+                </h3>
+                <small className="pt-2 theme-light">{oneArticle.part1}</small>
               </div>
-            );
-          })
-        )}
-      </div>
+            </div>
+          </div>
+          <div className="container pt-4">
+            <div className="d-flex align-items-center">
+              <h1 className="display-1 theme-bg theme-light-mellow-color rounded-circle px-3 me-3">
+                T
+              </h1>
+              <div className="theme-dark-mellow-color">
+                <h4>By Trend Team</h4>
+                <h4>Trend Watchers Daily</h4>
+              </div>
+            </div>
+
+            <div className="col-8">
+              <p className="pt-2">{oneArticle.part2}</p>
+
+              <p className="pt-2">{oneArticle.part3}</p>
+            </div>
+          </div>
+          {!user ? reviewForm : user.username !== "editor" ? reviewForm : null}
+
+          <div className="theme-bg">
+            {reviews.length === 0 ? (
+              <div className="container">
+                <h6 className="theme-light py-3">Be the first to review</h6>
+              </div>
+            ) : (
+              reviews.map((review, ind) => {
+                return (
+                  <div key={ind} className="container">
+                    <div className="d-flex align-items-center p-3 faded-bg col-5 my-3">
+                      <i class="bi bi-person-lines-fill display-6 me-4 theme-light-mellow-color"></i>
+
+                      <div className="">
+                        <h6 className="theme-light-mellow-color">
+                          {review.user.username}
+                        </h6>
+                        <p className="theme-light">{review.comment}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 };

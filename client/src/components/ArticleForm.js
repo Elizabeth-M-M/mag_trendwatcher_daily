@@ -41,8 +41,8 @@ const ArticleForm = ({ onArticleAdd }) => {
             image: "",
             category: "",
           });
-          navigator(`/`);
-          // navigator(`/articles/${article.id}`);
+
+          navigator(`/articles/${article.id}`);
         });
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -125,7 +125,11 @@ const ArticleForm = ({ onArticleAdd }) => {
             </div>
             <ul>
               {errors.length > 0
-                ? errors.map((err) => <li key={err}>{err}</li>)
+                ? errors.map((err) => (
+                    <li key={err} className="error-list">
+                      {err}
+                    </li>
+                  ))
                 : null}
             </ul>
           </form>

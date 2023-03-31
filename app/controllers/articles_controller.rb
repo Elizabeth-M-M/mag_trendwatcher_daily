@@ -8,8 +8,24 @@ class ArticlesController < ApplicationController
     render json: articles, each_serializer:ArticlePlusContentSerializer
   end
   def show
-    article= find_article
-    render json: article, include: ['reviews','reviews.user'] 
+ cookies[:page_views] ||=0
+    cookies[:page_views]= cookies[:page_views].to_i + 1
+    session[:page_views] ||=0
+    session[:page_views]+= 1
+
+    article = Article.find(params[:id])
+
+    if (session[:page_views]<7)
+      render json: article, include: ['reviews','reviews.user']
+    elsif(session[:user_id]|| session[:editor_id])
+        render json: article, include: ['reviews','reviews.user']
+    else
+      render json:{errors: ["Maximum pageview limit reached"]}, status: :unauthorized
+    end
+
+
+    # article= find_article
+    # render json: article, include: ['reviews','reviews.user'] 
   end
   def create
     article= Article.create!(article_params)
