@@ -18,6 +18,8 @@ API end
 - Github link: https://github.com/Elizabeth-M-M/magazine_ruby_on_rails_backend
 - Deployed link: https://trial1-cksf.onrender.com/articles/1, as an endpoint example
 
+If you decide to work with this version of the program, the setup is described below. If you need one part of the program, you can follow the links above. The deployed links are of the seperate repositories, not this repository.
+
 ### About
 This is a full stack app of a magazine outlet that allows users to view and read articles from a collection and leave reviews. An editor for the magazine is able to add, edit and delete an article. The app is built using React Router for client-side routing and uses a ruby on rails API.
 

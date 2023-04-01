@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = ({ handleUser }) => {
+
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
-
   const [loginFormData, setFormData] = useState({
     username: "",
     password: "",
@@ -29,7 +29,7 @@ const Login = ({ handleUser }) => {
     } else {
       userSession = "user";
     }
-    console.log(userSession);
+    // console.log(userSession);
 
     fetch(`/login/${userSession}`, {
       method: "POST",
@@ -64,10 +64,7 @@ const Login = ({ handleUser }) => {
             novalidate
           >
             <div className="col-md-6">
-              <label
-                htmlFor="username"
-                className="form-label fw-bold"
-              >
+              <label htmlFor="username" className="form-label fw-bold">
                 Username
               </label>
               <input
@@ -81,10 +78,7 @@ const Login = ({ handleUser }) => {
               />
             </div>
             <div className="col-md-6">
-              <label
-                htmlFor="password"
-                className="form-label fw-bold"
-              >
+              <label htmlFor="password" className="form-label fw-bold">
                 Password
               </label>
               <input
@@ -105,10 +99,7 @@ const Login = ({ handleUser }) => {
                   id="gridCheck"
                   onChange={handleInputs}
                 />
-                <label
-                  className="form-check-label fw-bold"
-                  for="gridCheck"
-                >
+                <label className="form-check-label fw-bold" for="gridCheck">
                   Sign in as Editor
                 </label>
               </div>
@@ -121,7 +112,11 @@ const Login = ({ handleUser }) => {
             </div>
             <ul>
               {errors.length > 0
-                ? errors.map((err) => <li key={err} className='error-list'>{err}</li>)
+                ? errors.map((err) => (
+                    <li key={err} className="error-list">
+                      {err}
+                    </li>
+                  ))
                 : null}
             </ul>
           </form>

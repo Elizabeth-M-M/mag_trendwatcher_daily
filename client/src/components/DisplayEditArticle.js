@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 const DisplayEditArticle = ({ elem, removeArticle }) => {
-  const navigator=useNavigate()
+  const navigator = useNavigate();
+  // Deletes an article
   function handleDelete() {
     fetch(`/articles/${elem.id}`, {
       method: "DELETE",
@@ -44,17 +45,4 @@ const DisplayEditArticle = ({ elem, removeArticle }) => {
 };
 
 export default DisplayEditArticle;
-{/* <div className="col-md-4">
-  <h4>{elem.part_title}</h4>
-  <h6>{elem.category}</h6>
-  <p>{elem.summary}</p>
-  <Link to={`/articles/${elem.id}`}>More</Link>
 
-  <button className="btn-style" onClick={handleDelete}>
-    delete
-  </button>
-
-  <div className="image-holder">
-    <img src={elem.image} alt={elem.part_title} />
-  </div>
-</div>; */}

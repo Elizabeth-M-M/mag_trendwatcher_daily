@@ -31,5 +31,4 @@ const ArticleText = ({ elem }) => {
 };
 
 export default ArticleText;
-// h6  theme-light-mellow-color
-// small theme-light
+

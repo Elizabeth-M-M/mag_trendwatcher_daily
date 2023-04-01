@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ArticleForm = ({ onArticleAdd }) => {
+
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
-
   const [articleFormData, setArticleFormData] = useState({
     title: "",
     content: "",
@@ -21,10 +21,9 @@ const ArticleForm = ({ onArticleAdd }) => {
     });
   }
   // console.log(articleFormData);
+  // Creates an article
   function handleSubmit(event) {
     event.preventDefault();
-    // console.log(articleFormData)
-
     fetch(`/articles`, {
       method: "POST",
       headers: {

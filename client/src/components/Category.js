@@ -17,11 +17,6 @@ const Category = ({
 }) => {
   const [search, setSearch] = useState("");
   const navigator = useNavigate();
-  // const [selectedArticles, setSelectedArticles] = useState([]);
-
-  function handleSearch(event) {
-    setSearch(event.target.value);
-  }
 
   let found = articles.filter((article) => {
     let articleName = article.title.toLocaleLowerCase();
@@ -62,11 +57,15 @@ const Category = ({
   let leftArticles = selectedArticles.slice(0, 3).map((article, i) => {
     return <ArticleImage elem={article} key={i} />;
   });
+
   let rightArticles = selectedArticles.slice(3, 6).map((article, i) => {
     return <ArticleImage2 elem={article} key={i} />;
   });
-  // console.log(category)
-  // console.log(user);
+
+   function handleSearch(event) {
+     setSearch(event.target.value);
+   }
+
   let userView = (
     <>
       <div className="container p-3">
@@ -93,9 +92,7 @@ const Category = ({
 
             <div className="col-md-4">
               {selectedArticles.length <= 8 ? null : (
-                <h6 className="theme-light-mellow-color">
-                  MORE
-                </h6>
+                <h6 className="theme-light-mellow-color">MORE</h6>
               )}
               {selectedArticles.length < 8
                 ? null
@@ -155,7 +152,7 @@ const Category = ({
   return (
     <>
       {!user ? userView : user.username !== "editor" ? userView : editorView}
-      <Footer/>
+      <Footer />
     </>
   );
 };

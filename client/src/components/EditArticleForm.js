@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const EditArticleForm = ({ articleToEdit }) => {
+
   const navigator = useNavigate();
   const [errors, setErrors] = useState([]);
-  console.log(articleToEdit);
-
   const [articleFormData, setEditArticleFormData] = useState(articleToEdit);
 
   function handleInputs(event) {
@@ -16,11 +15,9 @@ const EditArticleForm = ({ articleToEdit }) => {
       [name]: value,
     });
   }
-  // console.log(articleFormData);
+  // Edits an article
   function handleSubmit(event) {
     event.preventDefault();
-    // console.log(articleFormData)
-
     fetch(`/articles/${articleToEdit.id}`, {
       method: "PATCH",
       headers: {
@@ -112,7 +109,6 @@ const EditArticleForm = ({ articleToEdit }) => {
                 onChange={handleInputs}
               ></textarea>
             </div>
-
             <div className="col-12">
               <button type="submit" className="btn-style">
                 Edit Article

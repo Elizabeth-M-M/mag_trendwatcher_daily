@@ -12,9 +12,11 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
   let leftArticles = articles.slice(9, 13).map((article, i) => {
     return <ArticleImage elem={article} key={i} />;
   });
+
   let rightArticles = articles.slice(13, 17).map((article, i) => {
     return <ArticleImage2 elem={article} key={i} />;
   });
+  
   let userHomePage = (
     <>
       <div className="theme-bg-modified">
@@ -200,15 +202,13 @@ const Home = ({ user, articles, categoryBtns, setCategory }) => {
 
   return (
     <>
-      <div className="container">
-       
-      </div>
+      <div className="container"></div>
       {!user
         ? userHomePage
         : user.username !== "editor"
         ? userHomePage
         : editorHomePage}
-        <Footer/>
+      <Footer />
     </>
   );
 };

@@ -9,36 +9,35 @@ import Category from "./Category";
 import DisplayArticle from "./DisplayArticle";
 import ArticleForm from "./ArticleForm";
 import EditArticleForm from "./EditArticleForm";
-import Footer from "./Footer";
+
 const App = () => {
+
   const [user, setUser] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
-  const[articleToEdit, setArticleToEdit]=useState(null)
-//  console.log(user)
- const categoryBtns = [
-   "All",
-   "Lifestyle",
-   "Travel",
-   "Sport",
-   "Technology",
-   "Gaming",
-   "Science",
-   "Food",
-   "Business",
- ];
- const [category, setCategory] = useState("All");
+  const [articleToEdit, setArticleToEdit] = useState(null);
+  const [category, setCategory] = useState("All");
+  const categoryBtns = [
+    "All",
+    "Lifestyle",
+    "Travel",
+    "Sport",
+    "Technology",
+    "Gaming",
+    "Science",
+    "Food",
+    "Business",
+  ];
+// Fetches all articles
   useEffect(() => {
     fetch("/articles").then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-
-          setAllArticles(data)
-
+          setAllArticles(data);
         });
       }
     });
   }, []);
-
+// Keeps a user logged in
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -46,16 +45,17 @@ const App = () => {
       }
     });
   }, []);
-  function handleRemoveArticle(id){
-     let sortedArticles = allArticles.filter((article) => article.id !== id);
-     setAllArticles(sortedArticles)
-  }
-  function handleArticleAdd(article){
 
-          setAllArticles([...allArticles, article]);
-
+  function handleRemoveArticle(id) {
+    let sortedArticles = allArticles.filter((article) => article.id !== id);
+    setAllArticles(sortedArticles);
   }
-  console.log(allArticles.length)
+
+  function handleArticleAdd(article) {
+    setAllArticles([...allArticles, article]);
+  }
+
+  // console.log(allArticles.length);
 
   return (
     <div>
@@ -73,7 +73,10 @@ const App = () => {
           }
         ></Route>
         <Route path="/login" element={<Login handleUser={setUser} />}></Route>
-        <Route path="/article_add" element={<ArticleForm  onArticleAdd={handleArticleAdd}/>}></Route>
+        <Route
+          path="/article_add"
+          element={<ArticleForm onArticleAdd={handleArticleAdd} />}
+        ></Route>
         <Route
           path="/article_edit"
           element={<EditArticleForm articleToEdit={articleToEdit} />}
@@ -99,7 +102,6 @@ const App = () => {
         ></Route>
         <Route path="/signup" element={<Signup handleUser={setUser} />}></Route>
       </Routes>
-    
     </div>
   );
 };

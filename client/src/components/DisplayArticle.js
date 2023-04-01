@@ -13,7 +13,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
 
   let { id } = useParams();
   // console.log(id);
-
+// Gets a specific article
   useEffect(() => {
     fetch(`/articles/${id}`).then((res) => {
       if (res.ok) {
@@ -32,7 +32,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
   function handleReview(e) {
     e.preventDefault();
 
-    if (user === null|| user===undefined) {
+    if (user === null || user === undefined) {
       return navigator("/login");
     } else {
       let reviewFormData = {
@@ -93,7 +93,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
       </form>
     </div>
   );
-  console.log(errors)
+  console.log(errors);
   return (
     <>
       <div className="container">
@@ -183,7 +183,7 @@ const DisplayArticle = ({ user, articleToEdit }) => {
           </div>
         </>
       )}
-      <Footer/>
+      <Footer />
     </>
   );
 };
